@@ -7,7 +7,7 @@ const Footer = ({ linkTextColors, copyrightTextColor }) => {
         {/* Proje İsmi  */}
         <div className="flex items-center">
           <h2 className="text-white text-3xl p-4 ">
-            Go <span className="font-bold text-white"> Food</span>
+            Yemek<span className="font-bold text-white"> Bizim</span>
           </h2>
         </div>
 
@@ -42,7 +42,7 @@ const Footer = ({ linkTextColors, copyrightTextColor }) => {
               className={`text-white text-base mr-40`}
               style={{ color: copyrightTextColor }}
             >
-              Bahar & Mehmet Akif
+              Bahar Sevinti
             </p>
           </div>
         </div>

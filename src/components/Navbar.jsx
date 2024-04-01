@@ -46,7 +46,7 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
             onClick={navigateHomePage}
             className="text-white text-2xl sm:text-3xl lg:text-4xl px-2 cursor-pointer"
           >
-            Go <span className="font-bold">Food</span>
+          Yemek <span className="font-bold">Sizin</span>
           </h1>
         </div>
 

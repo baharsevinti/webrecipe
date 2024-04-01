@@ -13,7 +13,7 @@ const InfoCard = () => {
 
   return (
     <div className="bg-white border rounded-lg text-center p-4 m-2">
-      <h1 className="text-4xl font-bold">Malzemelerinizle Sanat Yapın!</h1>
+      <h1 className="text-4xl font-bold">Yemek Sizin Emek Hepimizin!</h1>
       <p className="mt-4 text-2xl text-left">
         Hoş geldiniz! Sitemizde,{" "}
         <Link to="/recipes" className="italic underline">
@@ -26,8 +26,7 @@ const InfoCard = () => {
         oluşturabilirsiniz.
       </p>
       <p className="mt-4 text-2xl text-left">
-        Malzemelerinizi seçin, hayal gücünüzü konuşturun ve mutfakta gerçek bir
-        şef gibi hissederek yemek yapmanın keyfini çıkarın!
+        Yemek Yapmaya Başlayın,usta şefler gibi
       </p>
       <button
         onClick={navigateRecipes}

@@ -40,7 +40,7 @@ const MakeRecipe = () => {
   //* Malzemeleri çekiyoruz
   useEffect(() => {
     axios
-      .get("http://localhost:3001/api/liste")
+      .get("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/food/all")
       .then((response) => {
         const data = response.data;
 
@@ -91,7 +91,7 @@ const MakeRecipe = () => {
     };
 
     axios
-      .post("http://localhost:3001/api/yemektarifial", postData)
+      .post("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/", postData)
       .then((response) => {
         const { data } = response;
         setRecipeText(data.tarif); // Tarif metnini state'e kaydet

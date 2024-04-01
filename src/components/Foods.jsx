@@ -8,7 +8,7 @@ const Foods = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/hazirtarifal"
+          "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/chat"
         );
         const data = response.data;
 
