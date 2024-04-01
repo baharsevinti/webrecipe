@@ -34,7 +34,7 @@ const LoginForm = () => {
   const register = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3001/api/auth/register",
+        "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/user/signup",
         {
           username: userName,
           password,
