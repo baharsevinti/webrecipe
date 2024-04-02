@@ -8,7 +8,7 @@ const Foods = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/chat"
+          "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/recipe/all"
         );
         const data = response.data;
 
@@ -31,11 +31,11 @@ const Foods = () => {
         >
           <img
             src={item.resimLinki}
-            alt={item.baslik}
+            alt={item.title}
             className="w-full h-[200px] object-cover rounded-t-lg "
           />
           <div className="flex justify-between px-2 py-4 text-xl">
-            <p className="font-bold">{item.baslik}</p>
+            <p className="font-bold">{item.title}</p>
           </div>
         </div>
       ))}

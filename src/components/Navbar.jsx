@@ -110,7 +110,7 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
             className="absolute right-4 top-4 cursor-pointer"
           />
           <h2 className="text-black text-3xl p-4 ">
-            Go <span className="font-bold text-white"> Food</span>
+            Yemek <span className="font-bold text-white"> Bizim</span>
           </h2>
           <nav>
             <ul className="flex flex-col p-4 text-gray-900 cursor-pointer">

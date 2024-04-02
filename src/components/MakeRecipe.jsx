@@ -43,19 +43,20 @@ const MakeRecipe = () => {
       .get("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/food/all")
       .then((response) => {
         const data = response.data;
+        console.log(data.filter(urun => urun.category.includes("Et")));
 
-        setEtler(data.etler);
-        setSebzeler(data.sebzeler);
-        setMeyveler(data.meyveler);
-        setBaklagiller(data.baklagiller);
-        setUnluMamuller(data.unlu_mamuller);
-        setSutUrunleri(data.sut_urunleri);
-        setBaharatlar(data.baharatlar);
-        setTatlandiricilar(data.tatlandiricilar);
-        setDenizUrunleri(data.deniz_urunleri);
-        setTahillar(data.tahillar);
-        setKuruyemisler(data.kuruyemisler);
-        setSekerler(data.sekerler);
+        setEtler(data.filter(urun => urun.category.includes("Et")));
+        setSebzeler(data.filter(urun => urun.category.includes("Sebze")));
+        setMeyveler(data.filter(urun => urun.category.includes("Meyve")));
+        setBaklagiller(data.filter(urun => urun.category.includes("Baklagil")));
+        setUnluMamuller(data.filter(urun => urun.category.includes("Unlu Mamul")));
+        setSutUrunleri(data.filter(urun => urun.category.includes("Süt Ürünü")));
+        setBaharatlar(data.filter(urun => urun.category.includes("Baharat")));
+        setTatlandiricilar(data.filter(urun => urun.category.includes("Tatlandırıcı")));
+        setDenizUrunleri(data.filter(urun => urun.category.includes("Deniz Ürünü")));
+        setTahillar(data.filter(urun => urun.category.includes("Tahıl")));
+        setKuruyemisler(data.filter(urun => urun.category.includes("Kuruyemiş")));
+        setSekerler(data.filter(urun => urun.category.includes("Şeker")));
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -86,15 +87,12 @@ const MakeRecipe = () => {
   const getRecipe = () => {
     const combinedIngredients = Object.values(selectedItems).flat().join(", ");
 
-    const postData = {
-      liste: combinedIngredients,
-    };
 
     axios
-      .post("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/", postData)
+      .post("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/chat?prompt="+combinedIngredients)
       .then((response) => {
         const { data } = response;
-        setRecipeText(data.tarif); // Tarif metnini state'e kaydet
+        setRecipeText(data.choices[0].message.content); // Tarif metnini state'e kaydet
         setModalVisible(true); // Modal'ı göster
       })
       .catch((error) => {

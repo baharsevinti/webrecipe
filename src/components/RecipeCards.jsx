@@ -11,10 +11,10 @@ const RecipeCards = () => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
-          "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/chat"
+          "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/recipes/all"
         );
         // Veriyi düzenle ve sadece tarifler kısmını al
-        const receivedRecipes = response.data.tarifler || [];
+        const receivedRecipes = response.data || [];
         setRecipes(receivedRecipes);
       } catch (error) {
         console.error("Error fetching recipes:", error);
@@ -43,15 +43,15 @@ const RecipeCards = () => {
             key={recipe.id}
             className="bg-red-300 p-4 rounded-md shadow-md transition-transform transform hover:scale-105"
           >
-            <h3 className="text-xl font-semibold mb-2">{recipe.baslik}</h3>
-            <p className="text-gray-600 capitalize">{recipe.tur}</p>
+            <h3 className="text-xl font-semibold mb-2">{recipe.title}</h3>
+            <p className="text-gray-600 capitalize">{recipe.type}</p>
           </div>
         ))}
       </div>
 
       {recipeDetailOpen && selectedRecipe && (
         <Modal
-          title={selectedRecipe.baslik}
+          title={selectedRecipe.title}
           centered
           visible={recipeDetailOpen}
           onOk={closeModal}
@@ -68,14 +68,13 @@ const RecipeCards = () => {
                 </p>
 
                 <ul className="list-disc pl-4 font-semibold">
-                  {selectedRecipe.malzemeler.map((malzeme, index) => (
+    
                     <li
                       className="text-gray-600 text-base capitalize"
-                      key={index}
                     >
-                      {malzeme}
+                      {selectedRecipe.ingredients}
                     </li>
-                  ))}
+           
                 </ul>
               </div>
 
@@ -86,14 +85,12 @@ const RecipeCards = () => {
                 </p>
 
                 <ol className="list-decimal pl-4 font-semibold">
-                  {selectedRecipe.tarif.map((adim, index) => (
-                    <li
+                <li
                       className="text-gray-600 text-base capitalize"
-                      key={index}
+                      key={0}
                     >
-                      {adim}
+                      {selectedRecipe.recipe}
                     </li>
-                  ))}
                 </ol>
               </div>
             </div>
@@ -101,7 +98,7 @@ const RecipeCards = () => {
 
           <img
             className="mt-4 mx-auto max-h-[420px]"
-            src={selectedRecipe.resimLinki}
+            src={selectedRecipe.photoLink}
             alt=""
           />
         </Modal>

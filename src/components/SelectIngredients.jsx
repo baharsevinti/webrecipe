@@ -18,8 +18,8 @@ const SelectIngredients = ({ label, options, onChange }) => {
         onChange={(e) => onChange(e, label)}
       >
         {validOptions.map((item) => (
-          <option key={item.id} value={item.ad}>
-            {item.ad}
+          <option key={item.id} value={item.name}>
+            {item.name}
           </option>
         ))}
       </select>

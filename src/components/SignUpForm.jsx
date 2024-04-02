@@ -36,13 +36,13 @@ const LoginForm = () => {
       const response = await axios.post(
         "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/user/signup",
         {
-          username: userName,
+          userName: userName,
           password,
           email,
         }
       );
 
-      if (response.status === 201) {
+      if (response.status === 200) {
         console.log("Kayıt başarılı:", response.data.message);
         navigateLoginPage();
       } else {
