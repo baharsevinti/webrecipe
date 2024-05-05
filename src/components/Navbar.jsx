@@ -1,5 +1,5 @@
 import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { BiFoodMenu } from "react-icons/bi";
+import { BiFoodMenu, BiShoppingBag } from "react-icons/bi"; // BiShoppingBag ekledim
 import { RiAiGenerate } from "react-icons/ri";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,6 +11,9 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
 
   const navigateSignUpPage = () => {
     navigate("/signUp");
+  };
+  const navigateAboneUpPage = () => {
+    navigate("/abone");
   };
   const navigateLoginPage = () => {
     navigate("/logIn");
@@ -28,16 +31,14 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
     navigate("/makeRecipe");
   };
 
-  // Butonların görünüp görünmedği durumlara göre stil değişecek
   const navbarStyle =
     isHiddenButtons && isHiddenInfo
-      ? "max-w-[1640] mx-auto flex justify-between items-center p-4"
+      ? "max-w-[1640] mx-auto flex justify-around items-center p-4"
       : "max-w-[1640] mx-auto flex justify-around items-center p-4";
 
   return (
     <>
       <div className={navbarStyle}>
-        {/* Sol Taraf */}
         <div className="flex items-center">
           <div onClick={() => setNav(!nav)} className="cursor-pointer">
             <AiOutlineMenu size={30} style={{ color: "orange" }} />
@@ -46,11 +47,10 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
             onClick={navigateHomePage}
             className="text-white text-2xl sm:text-3xl lg:text-4xl px-2 cursor-pointer"
           >
-          Yemek <span className="font-bold">Sizin</span>
+            Yemek <span className="font-bold">Sizin</span>
           </h1>
         </div>
 
-        {/* BUTTONS SİDE */}
         {!isHiddenInfo && (
           <div className="hidden lg:flex text-xl text-white">
             <button className="sm:px-3 hover:underline hover:opacity-50">
@@ -68,35 +68,37 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
           </div>
         )}
 
-        {/* LOGIN / SIGNUP BUTTON */}
         {!isHiddenButtons && (
           <div className="text-2xl ">
             <button
               onClick={navigateSignUpPage}
-              className="sm:px-4 mr-2 bg-gray-400 hover:bg-gray-200 rounded-lg text-lg sm:text-2xl
-      "
+              className="sm:px-4 mr-2 bg-gray-400 hover:bg-gray-200 rounded-lg text-lg sm:text-2xl"
             >
               Kayıt Ol
             </button>
+
             <button
               onClick={navigateLoginPage}
-              className="sm:px-4 bg-gray-400 hover:bg-gray-200 rounded-lg text-lg sm:text-2xl"
+              className="sm:px-4 mr-2 bg-gray-400 hover:bg-gray-200 rounded-lg text-lg sm:text-2xl"
             >
               Giriş Yap
+            </button>
+            <button
+              onClick={navigateAboneUpPage}
+              className="sm:px-3 mr-2 bg-orange-500 hover:bg-gray-100 rounded-lg text-lg sm:text-1xl"
+            >
+              <BiShoppingBag size={32} className="mr-2" /> 
+
             </button>
           </div>
         )}
 
-        {/* MOBİLE MENU - KÜÇÜK EKRAN*/}
-
-        {/* Sadece nav true olduğu zaman gözükecek */}
         {nav ? (
           <div className="bg-black/80 fixed w-full h-screen z-10 top-0 "></div>
         ) : (
           ""
         )}
 
-        {/* Side Menu*/}
         <div
           className={
             nav

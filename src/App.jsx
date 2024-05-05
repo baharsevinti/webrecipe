@@ -5,6 +5,7 @@ import LogIn from "./pages/LogIn";
 import Recipes from "./pages/Recipes";
 import AIRecipe from "./pages/AIRecipe";
 import AdminPanel from "./pages/Panel/AdminPanel";
+import Abone from "./components/Abone";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/makeRecipe" element={<AIRecipe />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
+        <Route path="/abone" element={<Abone/>}/>
       </Routes>
     </Router>
   );
