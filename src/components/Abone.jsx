@@ -1,72 +1,113 @@
 import React, { useState } from 'react';
 
-const Abone = () => {
-  const [kartBilgileri, setKartBilgileri] = useState({
-    kartNumarasi: '',
-    sonKullanmaTarihi: '',
-    guvenlikKodu: '',
-    adSoyad: '',
-  });
-  const [abonelikTipi, setAbonelikTipi] = useState('aylik');
+const PaymentScreen = () => {
+  const [paymentMethod, setPaymentMethod] = useState('creditCard');
+  const [creditCardNumber, setCreditCardNumber] = useState('');
+  const [securityCode, setSecurityCode] = useState('');
+  const [expirationMonth, setExpirationMonth] = useState('');
+  const [expirationYear, setExpirationYear] = useState('');
+  const [subscriptionType, setSubscriptionType] = useState('monthly');
 
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setKartBilgileri({ ...kartBilgileri, [name]: value });
+  const handlePaymentMethodChange = (event) => {
+    setPaymentMethod(event.target.value);
   };
 
-  const handleAbonelikOlustur = () => {
-    // Kart bilgilerini kullanarak abonelik oluşturulabilir.
-    const { kartNumarasi, sonKullanmaTarihi, guvenlikKodu, adSoyad } = kartBilgileri;
-    const abonelikBilgileri = {
-      abonelikTipi,
-      kartNumarasi,
-      sonKullanmaTarihi,
-      guvenlikKodu,
-      adSoyad,
-    };
-    console.log('Abonelik oluşturuldu:', abonelikBilgileri);
-    // Burada gerçek bir ödeme işlemi entegrasyonu yapılmalıdır.
+  const handleCreditCardNumberChange = (event) => {
+    setCreditCardNumber(event.target.value);
+  };
+
+  const handleSecurityCodeChange = (event) => {
+    setSecurityCode(event.target.value);
+  };
+
+  const handleExpirationMonthChange = (event) => {
+    setExpirationMonth(event.target.value);
+  };
+
+  const handleExpirationYearChange = (event) => {
+    setExpirationYear(event.target.value);
+  };
+
+  const handleSubscriptionTypeChange = (event) => {
+    setSubscriptionType(event.target.value);
+  };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+
+    // Ödemeyi işlemek için kod buraya gelecek
+    console.log('Ödeme işleniyor...');
+
+    // Üyeliği oluşturmak için kod buraya gelecek
+    console.log(subscriptionType, 'üyeliği oluşturuluyor...');
   };
 
   return (
-    <div>
-      <h2>Abonelik Oluştur</h2>
-      <div>
-        <label>
-          Abonelik Tipi:
-          <select value={abonelikTipi} onChange={(e) => setAbonelikTipi(e.target.value)}>
-            <option value="aylik">Aylık</option>
-            <option value="yillik">Yıllık</option>
+    <div className="payment-screen">
+      <h1>Ödeme</h1>
+
+      <form onSubmit={handleSubmit}>
+        <div className="payment-method">
+          <label>Ödeme Yöntemi:</label>
+          <select value={paymentMethod} onChange={handlePaymentMethodChange}>
+            <option value="creditCard">Kredi Kartı</option>
           </select>
-        </label>
-      </div>
-      <div>
-        <label>
-          Kart Numarası:
-          <input type="text" name="kartNumarasi" value={kartBilgileri.kartNumarasi} onChange={handleInputChange} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Son Kullanma Tarihi:
-          <input type="text" name="sonKullanmaTarihi" value={kartBilgileri.sonKullanmaTarihi} onChange={handleInputChange} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Güvenlik Kodu:
-          <input type="text" name="guvenlikKodu" value={kartBilgileri.guvenlikKodu} onChange={handleInputChange} />
-        </label>
-      </div>
-      <div>
-        <label>
-          Ad Soyad:
-          <input type="text" name="adSoyad" value={kartBilgileri.adSoyad} onChange={handleInputChange} />
-        </label>
-      </div>
-      <button onClick={handleAbonelikOlustur}>Abonelik Oluştur</button>
+        </div>
+
+        {paymentMethod === 'creditCard' && (
+          <div className="credit-card-details">
+            <h2>Kredi Kartı Bilgileri</h2>
+            <div className="credit-card-inputs">
+              <label>Kredi Kartı Numarası:</label>
+              <input
+                type="text"
+                value={creditCardNumber}
+                onChange={handleCreditCardNumberChange}
+              />
+
+              <label>Güvenlik Kodu:</label>
+              <input
+                type="text"
+                value={securityCode}
+                onChange={handleSecurityCodeChange}
+              />
+
+              <label>Son Kullanma Tarihi:</label>
+              <div className="expiration-date">
+                <select value={expirationMonth} onChange={handleExpirationMonthChange}>
+                  <option value="">Ay</option>
+                  {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map((month) => (
+                    <option key={month} value={month}>
+                      {month}
+                    </option>
+                  ))}
+                </select>
+
+                <select value={expirationYear} onChange={handleExpirationYearChange}>
+                  <option value="">Yıl</option>
+                  {Array.from({ length: 10 }, (_, index) => new Date().getFullYear() + index).map((year) => (
+                    <option key={year} value={year}>
+                      {year}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+          </div>
+        )}
+
+        <div className="subscription-type">
+          <h2>Üyelik Tipi</h2>
+          <select value={subscriptionType} onChange={handleSubscriptionTypeChange}>
+            <option value="monthly">Aylık</option>
+            <option value="yearly">Yıllık</option>
+          </select>
+        </div>
+
+        <button type="submit">Ödemeyi Yap</button>
+      </form>
     </div>
   );
 };
 
-export default Abone;
+export default PaymentScreen;

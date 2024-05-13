@@ -4,6 +4,7 @@ import { RiAiGenerate } from "react-icons/ri";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
+
 const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
   const [nav, setNav] = useState(false);
 
