@@ -4,7 +4,7 @@ import { pricesItems } from '../ constants'
 const Abone = () => {
     return (
         <div id='pricing' className='mt-[4%] flex flex-col justify-center items-center bg-white'>
-            <span className='font-bold text-3xl mt-8 '>Pricing Plans</span>
+            <span className='font-bold text-3xl mt-8 '>Abonelik Al</span>
             <h1 className='text-xl mt-10 text-gray-600'>
                 Choose a membership plan to get started.
             </h1>

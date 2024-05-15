@@ -2,8 +2,9 @@ import  { useState } from "react";
 import Cards from 'react-credit-cards'
 import 'react-credit-cards/es/styles-compiled.css'
 import { RiRobot2Fill } from "react-icons/ri";
-import Footer from "./Footer";
+import  Footer from "./Footer";
 import { Button, Input } from "antd";
+import Navbar from "./Navbar";
 
 
 //TODO: Validate İşlemleri Yapılacak.
@@ -12,11 +13,11 @@ import { Button, Input } from "antd";
 
 
 const CardForm = () => {
-    const [name, setName] = useState<string>('')
-    const [cardNumber, setCardNumber] = useState<string>('')
-    const [expiry, setExpiry] = useState<string>('')
-    const [cvc, setCvc] = useState<string>('')
-    const [focus, setFocus] = useState<string>('')
+    const [name, setName] = useState('')
+    const [cardNumber, setCardNumber] = useState('')
+    const [expiry, setExpiry] = useState('')
+    const [cvc, setCvc] = useState('')
+    const [focus, setFocus] = useState('')
 
     const getPayment = () => {
 
@@ -26,17 +27,10 @@ const CardForm = () => {
 
     return (
         <div className="p-2">
-            {/* Navbar */}
-            <div className="flex justify-between">
-                <div className="ml-6 lg:ml-40 md:ml-24 sm:ml-16 mt-3 flex justify-center items-center">
-                    <RiRobot2Fill size={40} />
-                    <h1 className="pl-5 text-lg font-semibold tracking-normal leading-normal ">FunCodes</h1>
-                </div>
-            </div>
+          
+    
 
-            {/* Gray Line */}
-            <hr className="w-full border-gray-300 mt-3" />
-
+       
             {/* Card */}
             <div className="my-8 mx-auto text-center">
                 <Cards
@@ -88,7 +82,7 @@ const CardForm = () => {
                 />
 
 
-                <Button onClick={getPayment} type="primary" size="large" className="w-20" >Pay</Button>
+                <Button onClick={getPayment} type="primary" size="large" className="w-20 bg-gray-500" >Pay</Button>
 
             </form>
 

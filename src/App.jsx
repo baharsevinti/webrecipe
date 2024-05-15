@@ -8,6 +8,7 @@ import AdminPanel from "./pages/Panel/AdminPanel";
 import Abone from "./components/Abone";
 
 import DarkModeToggle from "./DarkModeToggle"; // Dark Mode butonu
+import GetPayment from "./pages/GetPayment";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/makeRecipe" element={<AIRecipe />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
         <Route path="/abone" element={<Abone />} />
+        <Route path="/getPayment" element={<GetPayment />} />
       </Routes>
     </Router>
   );
