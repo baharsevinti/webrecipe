@@ -1,21 +1,22 @@
-import { AiOutlineMenu, AiOutlineClose } from "react-icons/ai";
-import { BiFoodMenu, BiShoppingBag } from "react-icons/bi"; // BiShoppingBag ekledim
-import { RiAiGenerate } from "react-icons/ri";
 import React, { useState } from "react";
+import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
+import { BiFoodMenu, BiShoppingBag } from "react-icons/bi";
+import { RiAiGenerate } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
-
 
 const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
   const [nav, setNav] = useState(false);
-
+  const [searchQuery, setSearchQuery] = useState(""); // Arama sorgusu için state
   const navigate = useNavigate();
 
   const navigateSignUpPage = () => {
     navigate("/signUp");
   };
+
   const navigateAboneUpPage = () => {
     navigate("/abone");
   };
+
   const navigateLoginPage = () => {
     navigate("/logIn");
   };
@@ -30,6 +31,18 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
 
   const navigateMakeRecipe = () => {
     navigate("/makeRecipe");
+  };
+
+  const handleSearchChange = (event) => {
+    setSearchQuery(event.target.value);
+  };
+
+  const handleSearchSubmit = (event) => {
+    event.preventDefault();
+    // Arama işlemi burada yapılabilir
+    console.log("Aranan:", searchQuery);
+    // Örneğin:
+    // navigate("/search?q=" + encodeURIComponent(searchQuery));
   };
 
   const navbarStyle =
@@ -70,7 +83,7 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
         )}
 
         {!isHiddenButtons && (
-          <div className="text-2xl ">
+          <div className="text-2xl flex items-center">
             <button
               onClick={navigateSignUpPage}
               className="sm:px-4 mr-2 bg-gray-400 hover:bg-gray-200 rounded-lg text-lg sm:text-2xl"
@@ -84,15 +97,32 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
             >
               Giriş Yap
             </button>
+
             <button
               onClick={navigateAboneUpPage}
-              className="sm:px-3 mr-2 bg-orange-500 hover:bg-gray-100 rounded-lg text-lg sm:text-1xl"
+              className="sm:px-3 mr-2 bg-orange-500 hover:bg-gray-100 rounded-lg text-lg sm:text-1xl flex items-center"
             >
-              <BiShoppingBag size={32} className="mr-2" /> 
-
+              <AiOutlineShoppingCart size={26} className="mr-2" />
+              Üye Ol
             </button>
           </div>
         )}
+
+        <form onSubmit={handleSearchSubmit} className="flex items-center">
+          <input
+            type="text"
+            placeholder="Ara..."
+            value={searchQuery}
+            onChange={handleSearchChange}
+            className="p-2 mr-4 rounded-lg border-none focus:outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none"
+          >
+            <AiOutlineSearch />
+          </button>
+        </form>
 
         {nav ? (
           <div className="bg-black/80 fixed w-full h-screen z-10 top-0 "></div>
@@ -133,3 +163,4 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
 };
 
 export default Navbar;
+

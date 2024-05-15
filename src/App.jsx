@@ -6,10 +6,12 @@ import Recipes from "./pages/Recipes";
 import AIRecipe from "./pages/AIRecipe";
 import AdminPanel from "./pages/Panel/AdminPanel";
 import Abone from "./components/Abone";
+import DarkModeToggle from "./DarkModeToggle"; // Dark Mode butonu
 
 function App() {
   return (
     <Router>
+      <DarkModeToggle /> {/* Dark Mode butonunu ekleyin */}
       <Routes>
         <Route path="/" element={<HomePage />} />
         {/* <Route path="/" element={<AdminPanel />} /> */}
@@ -18,7 +20,7 @@ function App() {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/makeRecipe" element={<AIRecipe />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
-        <Route path="/abone" element={<Abone/>}/>
+        <Route path="/abone" element={<Abone />} />
       </Routes>
     </Router>
   );
