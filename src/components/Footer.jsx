@@ -47,7 +47,10 @@ const Footer = ({ linkTextColors, copyrightTextColor }) => {
           </div>
         </div>
       </div>
+      
+
     </>
+    
   );
 };
 

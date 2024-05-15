@@ -6,6 +6,7 @@ import Recipes from "./pages/Recipes";
 import AIRecipe from "./pages/AIRecipe";
 import AdminPanel from "./pages/Panel/AdminPanel";
 import Abone from "./components/Abone";
+
 import DarkModeToggle from "./DarkModeToggle"; // Dark Mode butonu
 
 function App() {
