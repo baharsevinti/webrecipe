@@ -8,7 +8,7 @@ const Foods = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/recipe/all"
+          "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/recipe/all"
         );
         const data = response.data;
 

@@ -10,7 +10,7 @@ const Panel_Users = () => {
   useEffect(() => {
     const fetchUserList = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/api/user/list");
+        const response = await axios.get("https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/users");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching user list:", error);

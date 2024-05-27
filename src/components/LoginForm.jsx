@@ -34,7 +34,7 @@ const LoginForm = () => {
   const login = async () => {
     try {
       const response = await axios.post(
-        "https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/user/login",
+        "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/user/login",
         {
           username: email,
           password,

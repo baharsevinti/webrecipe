@@ -9,11 +9,12 @@ import Abone from "./components/Abone";
 
 import DarkModeToggle from "./DarkModeToggle"; // Dark Mode butonu
 import GetPayment from "./pages/GetPayment";
+import Favori from "./components/Favori";
 
 function App() {
   return (
     <Router>
-      <DarkModeToggle /> {/* Dark Mode butonunu ekleyin */}
+      
       <Routes>
         <Route path="/" element={<HomePage />} />
         {/* <Route path="/" element={<AdminPanel />} /> */}
@@ -22,9 +23,11 @@ function App() {
         <Route path="/recipes" element={<Recipes />} />
         <Route path="/makeRecipe" element={<AIRecipe />} />
         <Route path="/adminPanel" element={<AdminPanel />} />
-        <Route path="/abone" element={<Abone />} />
+        <Route path="/abone" element={<Abone />} /> 
         <Route path="/getPayment" element={<GetPayment />} />
+        <Route path="/favori" element={<Favori />} />
       </Routes>
+      <DarkModeToggle /> {/* Dark Mode butonunu ekleyin */}
     </Router>
   );
 }

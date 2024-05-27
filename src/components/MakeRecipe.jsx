@@ -40,7 +40,7 @@ const MakeRecipe = () => {
   //* Malzemeleri çekiyoruz
   useEffect(() => {
     axios
-      .get("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/food/all")
+      .get("https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/food/all")
       .then((response) => {
         const data = response.data;
         console.log(data.filter(urun => urun.category.includes("Et")));
@@ -89,7 +89,7 @@ const MakeRecipe = () => {
 
 
     axios
-      .post("https://foodrecipee-69b7bbf0e36c.herokuapp.com/api/v1/chat?prompt="+combinedIngredients)
+      .post("https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/chat?prompt="+combinedIngredients)
       .then((response) => {
         const { data } = response;
         setRecipeText(data.choices[0].message.content); // Tarif metnini state'e kaydet

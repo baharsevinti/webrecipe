@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Space, Table, Image } from "antd";
+import { Image, Space, Table } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Panel_Recipes = () => {
   const [data, setData] = useState([]);
@@ -12,9 +12,9 @@ const Panel_Recipes = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3001/api/hazirtarifal"
+          "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/recipes/all"
         );
-        setData(response.data.tarifler); // API'den gelen veriyi state'e set et
+        setData(response.data); // API'den gelen veriyi state'e set et
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -35,8 +35,10 @@ const Panel_Recipes = () => {
 
   const deleteRecipe = async (recipeId) => {
     try {
-      // MongoDB'den tarifi siliyoruz
-      await axios.delete(`http://localhost:3001/api/silTarif/${recipeId}`);
+      // veritabanından tarifi siliyoruz
+      await axios.delete(
+        "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/recipes/deleteById/${recipeId}"
+      );
 
       // state'den siliyoruz
       setData((prevData) =>
@@ -50,19 +52,19 @@ const Panel_Recipes = () => {
   const columns = [
     {
       title: "Tarif Adı",
-      dataIndex: "baslik",
-      key: "baslik",
+      dataIndex: "title",
+      key: "title",
       render: (text) => <a>{text}</a>,
     },
     {
       title: "Tarif Türü",
-      dataIndex: "tur",
-      key: "tur",
+      dataIndex: "type",
+      key: "type",
     },
     {
       title: "Resim",
-      dataIndex: "resimLinki",
-      key: "resimLinki",
+      dataIndex: "photo_link",
+      key: "photo_link",
       render: (text) => <Image src={text} alt="Resim" width={50} />,
     },
     {

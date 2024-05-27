@@ -1,12 +1,18 @@
 import React, { useState } from "react";
-import { AiOutlineMenu, AiOutlineClose, AiOutlineSearch, AiOutlineShoppingCart } from "react-icons/ai";
-import { BiFoodMenu, BiShoppingBag } from "react-icons/bi";
+import {
+  AiOutlineMenu,
+  AiOutlineClose,
+  AiOutlineSearch,
+  AiOutlineShoppingCart,
+  AiOutlineHeart,
+} from "react-icons/ai";
+import { BiFoodMenu } from "react-icons/bi";
 import { RiAiGenerate } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
 const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
   const [nav, setNav] = useState(false);
-  const [searchQuery, setSearchQuery] = useState(""); // Arama sorgusu için state
+  const [searchQuery, setSearchQuery] = useState("");
   const navigate = useNavigate();
 
   const navigateSignUpPage = () => {
@@ -33,16 +39,17 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
     navigate("/makeRecipe");
   };
 
+  const navigateFavoriPage = () => {
+    navigate("/favori"); // Navigate to the Favori page
+  };
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
-    // Arama işlemi burada yapılabilir
     console.log("Aranan:", searchQuery);
-    // Örneğin:
-    // navigate("/search?q=" + encodeURIComponent(searchQuery));
   };
 
   const navbarStyle =
@@ -154,6 +161,9 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
                 <RiAiGenerate size={26} className="mr-4" /> Kendi Tarifinizi
                 Oluşturun
               </li>
+              <li onClick={navigateFavoriPage} className="text-xl flex py-4 ">
+                <AiOutlineHeart size={26} className="mr-4" /> Favori Tarifler
+              </li>
             </ul>
           </nav>
         </div>
@@ -163,4 +173,5 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
 };
 
 export default Navbar;
+
 
