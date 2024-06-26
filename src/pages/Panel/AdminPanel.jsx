@@ -1,7 +1,7 @@
-import React from "react";
-import { TbFileDescription } from "react-icons/tb";
-import { PiUsersThreeFill } from "react-icons/pi";
 import { Tabs } from "antd";
+import React from "react";
+import { PiUsersThreeFill } from "react-icons/pi";
+import { TbFileDescription } from "react-icons/tb";
 import Panel_Recipes from "./Panel_Recipes";
 import Panel_Users from "./Panel_Users";
 

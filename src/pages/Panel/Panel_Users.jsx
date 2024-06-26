@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { Space, Table, Image } from "antd";
+import { Table } from "antd";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Panel_Users = () => {
   const [users, setUsers] = useState([]);
@@ -10,7 +10,7 @@ const Panel_Users = () => {
   useEffect(() => {
     const fetchUserList = async () => {
       try {
-        const response = await axios.get("https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/users");
+        const response = await axios.get("http://localhost:8080/api/v1/user/all");
         setUsers(response.data);
       } catch (error) {
         console.error("Error fetching user list:", error);
@@ -31,12 +31,11 @@ const Panel_Users = () => {
     return <p>Hata oluştu: {error.message}</p>;
   }
 
-  // TODO: DB'DEKİ JSON DOYSASINA UYGUN DATAINDEX YAZILACAK
   const columns = [
     {
       title: "Kullanıcı Adı",
-      dataIndex: "username",
-      key: "username",
+      dataIndex: "userName",
+      key: "userName",
       render: (text) => <a>{text}</a>,
     },
     {

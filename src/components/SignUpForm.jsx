@@ -1,19 +1,16 @@
-import { Input } from "antd";
-import React from "react";
-import { useState } from "react";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { useNavigate } from "react-router-dom";
+import { Alert, Input } from "antd";
 import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-//TODO: SignUp fonksiyonu yapılacak
-//TODO: Validation yapılacak
-
-const LoginForm = () => {
+const SignUpForm = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [userName, setUserName] = useState("");
+  const [error, setError] = useState(null);
 
-  const navigate = useNavigate();
+  const navigateLoginPage = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -27,14 +24,44 @@ const LoginForm = () => {
     setUserName(event.target.value);
   };
 
-  const navigateLoginPage = () => {
-    navigate("/logIn");
+  const validateForm = () => {
+    if (!userName.trim()) {
+      setError("Kullanıcı adı boş olamaz");
+      return false;
+    }
+
+    if (!email.trim()) {
+      setError("Email alanı boş olamaz");
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Geçerli bir email adresi giriniz");
+      return false;
+    }
+
+    if (!password.trim()) {
+      setError("Şifre alanı boş olamaz");
+      return false;
+    }
+
+    if (password.trim().length < 6) {
+      setError("Şifre en az 6 karakter olmalıdır");
+      return false;
+    }
+
+    return true;
   };
 
   const register = async () => {
     try {
+      if (!validateForm()) {
+        return;
+      }
+
       const response = await axios.post(
-        "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/user/signup",
+        "http://localhost:8080/api/v1/user/signup",
         {
           userName: userName,
           password,
@@ -44,17 +71,18 @@ const LoginForm = () => {
 
       if (response.status === 200) {
         console.log("Kayıt başarılı:", response.data.message);
-        navigateLoginPage();
+        navigateLoginPage("/logIn");
       } else {
-        console.error("Kayıt başarısız:", response.data.error);
+        setError("Kayıt başarısız: " + response.data.error);
       }
     } catch (error) {
-      console.error("Kayıt başarısız:", error.response.data);
+      setError("Kayıt başarısız: " + error.response.data);
     }
   };
 
   const handleRegisterClick = async (event) => {
     event.preventDefault();
+    setError(null);
     await register();
   };
 
@@ -66,9 +94,19 @@ const LoginForm = () => {
         </h1>
       </div>
 
-      {/* Inputs */}
+      {error && (
+        <Alert
+          message="Error"
+          description={error}
+          type="error"
+          showIcon
+          closable
+          onClose={() => setError(null)}
+          className="mb-4"
+        />
+      )}
+
       <form className="flex flex-col w-full max-w-md">
-        {/* User Name */}
         <div className="mb-4">
           <Input
             placeholder="Kullanıcı Adı"
@@ -79,7 +117,6 @@ const LoginForm = () => {
           />
         </div>
 
-        {/* Email */}
         <div className="mb-4">
           <Input
             placeholder="Email"
@@ -91,7 +128,6 @@ const LoginForm = () => {
           />
         </div>
 
-        {/* Password */}
         <div className="mb-4">
           <Input.Password
             placeholder="Şifre"
@@ -110,7 +146,6 @@ const LoginForm = () => {
           />
         </div>
 
-        {/* Button */}
         <div>
           <button
             onClick={handleRegisterClick}
@@ -124,4 +159,4 @@ const LoginForm = () => {
   );
 };
 
-export default LoginForm;
+export default SignUpForm;

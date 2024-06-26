@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import {
-  AiOutlineMenu,
   AiOutlineClose,
-  AiOutlineSearch,
-  AiOutlineShoppingCart,
   AiOutlineHeart,
+  AiOutlineMenu,
+  AiOutlineShoppingCart,
 } from "react-icons/ai";
 import { BiFoodMenu } from "react-icons/bi";
+import { FaHistory } from "react-icons/fa";
 import { RiAiGenerate } from "react-icons/ri";
 import { useNavigate } from "react-router-dom";
 
@@ -43,6 +43,10 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
     navigate("/favori"); // Navigate to the Favori page
   };
 
+  const navigatePaymentHistoryPage = () => {
+    navigate("/paymentHistory"); // Navigate to the Favori page
+  };
+
   const handleSearchChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -66,7 +70,7 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
           </div>
           <h1
             onClick={navigateHomePage}
-            className="text-white text-2xl sm:text-3xl lg:text-4xl px-2 cursor-pointer"
+            className="text-black text-2xl sm:text-3xl lg:text-4xl px-2 cursor-pointer"
           >
             Yemek <span className="font-bold">Sizin</span>
           </h1>
@@ -115,22 +119,6 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
           </div>
         )}
 
-        <form onSubmit={handleSearchSubmit} className="flex items-center">
-          <input
-            type="text"
-            placeholder="Ara..."
-            value={searchQuery}
-            onChange={handleSearchChange}
-            className="p-2 mr-4 rounded-lg border-none focus:outline-none"
-          />
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 focus:outline-none"
-          >
-            <AiOutlineSearch />
-          </button>
-        </form>
-
         {nav ? (
           <div className="bg-black/80 fixed w-full h-screen z-10 top-0 "></div>
         ) : (
@@ -164,6 +152,12 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
               <li onClick={navigateFavoriPage} className="text-xl flex py-4 ">
                 <AiOutlineHeart size={26} className="mr-4" /> Favori Tarifler
               </li>
+              <li
+                onClick={navigatePaymentHistoryPage}
+                className="text-xl flex py-4 "
+              >
+                <FaHistory size={26} className="mr-4" /> Ödeme Geçmişi
+              </li>
             </ul>
           </nav>
         </div>
@@ -173,5 +167,3 @@ const Navbar = ({ isHiddenInfo, isHiddenButtons }) => {
 };
 
 export default Navbar;
-
-

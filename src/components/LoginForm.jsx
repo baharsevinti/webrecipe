@@ -1,12 +1,8 @@
-import { Input } from "antd";
-import axios from "axios";
-import React from "react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
-import { Alert } from "antd";
-
-//TODO: Validation yapılacak
+import { Alert, Input } from "antd";
+import axios from "axios";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginForm = () => {
   const [email, setEmail] = useState("");
@@ -31,31 +27,56 @@ const LoginForm = () => {
     navigate("/adminPanel");
   };
 
+  const validateForm = () => {
+    if (!email.trim()) {
+      setError("Email alanı boş olamaz");
+      return false;
+    }
+
+    if (!password.trim()) {
+      setError("Şifre alanı boş olamaz");
+      return false;
+    }
+
+    if (password.trim().length < 6) {
+      setError("Şifre en az 6 karakter olmalıdır");
+      return false;
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      setError("Geçerli bir email adresi giriniz");
+      return false;
+    }
+
+    return true;
+  };
+
   const login = async () => {
     try {
+      if (!validateForm()) {
+        return;
+      }
+
       const response = await axios.post(
-        "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/user/login",
+        "http://localhost:8080/api/v1/user/login",
         {
-          username: email,
-          password,
           email,
+          password,
         }
       );
-  
+
       if (response.status === 200) {
-        const data = response.data;
-  
-        console.log("Login successful:", data.token);
-  
-        if (email === 'admin@example.com') {
-          
+        console.log("DATA:", response.data);
+        const role = response.data;
+
+        if (role === "ADMIN") {
           navigateAdminPanel();
         } else {
-          
           navigateMakeRecipe();
         }
       } else {
-        setError(response.data.message);
+        setError(response.data);
       }
     } catch (error) {
       setError(error.message);
@@ -74,11 +95,10 @@ const LoginForm = () => {
         <h1 className="font-semibold text-2xl">Hoş Geldiniz!</h1>
       </div>
 
-      {/* Display error message */}
       {error && (
         <Alert
           message="Error"
-          description={"Kullanıcı adı veya şifre hatalı"}
+          description={error}
           type="error"
           showIcon
           closable
@@ -87,28 +107,23 @@ const LoginForm = () => {
         />
       )}
 
-      {/* Inputs */}
       <form className="flex flex-col w-full max-w-md">
-        {/* Email */}
         <div className="mb-4">
           <Input
             placeholder="Email"
             type="email"
             value={email}
             onChange={handleEmailChange}
-            status={email.trim() === "" ? "error" : ""}
             className="rounded-xl h-12 border-gray-700 px-4"
           />
         </div>
 
-        {/* Password */}
         <div className="mb-4">
           <Input.Password
             placeholder="Şifre"
             type="password"
             value={password}
             onChange={handlePasswordChange}
-            status={password.trim() === "" ? "error" : ""}
             className="rounded-xl h-12 border-gray-700 px-4"
             iconRender={(visible) =>
               visible ? (
@@ -120,7 +135,6 @@ const LoginForm = () => {
           />
         </div>
 
-        {/* Button */}
         <div>
           <button
             onClick={handleLoginClick}

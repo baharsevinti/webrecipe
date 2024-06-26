@@ -1,19 +1,21 @@
-import React, { useState, useEffect } from "react";
-import { Modal } from "antd";
+import { SearchOutlined } from "@ant-design/icons";
+import { Input, Modal } from "antd";
 import axios from "axios";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
+import React, { useEffect, useState } from "react";
+import { AiFillHeart, AiOutlineHeart } from "react-icons/ai";
 
 const RecipeCards = () => {
   const [recipeDetailOpen, setRecipeDetailOpen] = useState(false);
   const [selectedRecipe, setSelectedRecipe] = useState(null);
   const [recipes, setRecipes] = useState([]);
   const [favorites, setFavorites] = useState([]);
+  const [searchTerm, setSearchTerm] = useState(""); // Arama terimi için state
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(
-          "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/recipes/all"
+          "http://localhost:8080/api/v1/recipes/all"
         );
         const receivedRecipes = response.data || [];
         setRecipes(receivedRecipes);
@@ -24,6 +26,13 @@ const RecipeCards = () => {
 
     fetchRecipes();
   }, []);
+
+  // Tarif başlığında harf duyarlı arama yapacak fonksiyon
+  const filterRecipes = (recipe) => {
+    const title = recipe.title.toLowerCase();
+    const searchTermLower = searchTerm.toLowerCase();
+    return title.includes(searchTermLower);
+  };
 
   const openModal = (recipe) => {
     setSelectedRecipe(recipe);
@@ -45,8 +54,17 @@ const RecipeCards = () => {
 
   return (
     <div className="container mx-auto my-8">
+      {/* Arama kutusu */}
+      <Input
+        placeholder="Tarif ara..."
+        onChange={(e) => setSearchTerm(e.target.value)}
+        value={searchTerm}
+        className="mb-4 bg-gray-300 flex justify-center max-w-[300px] mx-auto"
+        suffix={<SearchOutlined style={{ color: "#1890ff" }} />}
+      />
+
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
-        {recipes.map((recipe) => (
+        {recipes.filter(filterRecipes).map((recipe) => (
           <div
             key={recipe.id}
             className="bg-red-300 p-4 rounded-md shadow-md transition-transform transform hover:scale-105"
@@ -124,5 +142,3 @@ const RecipeCards = () => {
 };
 
 export default RecipeCards;
-
-

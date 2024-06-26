@@ -1,25 +1,23 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Foods = () => {
   const [foods, setFoods] = useState([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchRecipes = async () => {
       try {
         const response = await axios.get(
-          "https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/recipe/all"
+          "http://localhost:8080/api/v1/recipes/all"
         );
-        const data = response.data;
-
-        const tarifler = data && data.tarifler ? data.tarifler : [];
-        setFoods(tarifler);
+        const receivedRecipes = response.data || [];
+        setFoods(receivedRecipes);
       } catch (error) {
-        console.error("Error fetching data:", error);
+        console.error("Error fetching recipes:", error);
       }
     };
 
-    fetchData();
+    fetchRecipes();
   }, []);
 
   return (
@@ -27,10 +25,10 @@ const Foods = () => {
       {foods.map((item, index) => (
         <div
           key={item._id}
-          className="border shadow-lg rounded-lg hover:scale-105 duration-300"
+          className="border shadow-lg rounded-lg hover:scale-105 duration-300 mb-4"
         >
           <img
-            src={item.resimLinki}
+            src={item.photoLink}
             alt={item.title}
             className="w-full h-[200px] object-cover rounded-t-lg "
           />

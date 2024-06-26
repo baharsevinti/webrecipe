@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from "react";
 import axios from "axios";
+import React, { useEffect, useState } from "react";
 import SelectIngredients from "./SelectIngredients";
 
-import { Modal, Button } from "antd";
+import { Modal } from "antd";
 
 const MakeRecipe = () => {
   const [etler, setEtler] = useState([]);
@@ -40,23 +40,35 @@ const MakeRecipe = () => {
   //* Malzemeleri çekiyoruz
   useEffect(() => {
     axios
-      .get("https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/food/all")
+      .get("http://localhost:8080/api/v1/food/all")
       .then((response) => {
         const data = response.data;
-        console.log(data.filter(urun => urun.category.includes("Et")));
+        console.log(data.filter((urun) => urun.category.includes("Et")));
 
-        setEtler(data.filter(urun => urun.category.includes("Et")));
-        setSebzeler(data.filter(urun => urun.category.includes("Sebze")));
-        setMeyveler(data.filter(urun => urun.category.includes("Meyve")));
-        setBaklagiller(data.filter(urun => urun.category.includes("Baklagil")));
-        setUnluMamuller(data.filter(urun => urun.category.includes("Unlu Mamul")));
-        setSutUrunleri(data.filter(urun => urun.category.includes("Süt Ürünü")));
-        setBaharatlar(data.filter(urun => urun.category.includes("Baharat")));
-        setTatlandiricilar(data.filter(urun => urun.category.includes("Tatlandırıcı")));
-        setDenizUrunleri(data.filter(urun => urun.category.includes("Deniz Ürünü")));
-        setTahillar(data.filter(urun => urun.category.includes("Tahıl")));
-        setKuruyemisler(data.filter(urun => urun.category.includes("Kuruyemiş")));
-        setSekerler(data.filter(urun => urun.category.includes("Şeker")));
+        setEtler(data.filter((urun) => urun.category.includes("Et")));
+        setSebzeler(data.filter((urun) => urun.category.includes("Sebze")));
+        setMeyveler(data.filter((urun) => urun.category.includes("Meyve")));
+        setBaklagiller(
+          data.filter((urun) => urun.category.includes("Baklagil"))
+        );
+        setUnluMamuller(
+          data.filter((urun) => urun.category.includes("Unlu Mamul"))
+        );
+        setSutUrunleri(
+          data.filter((urun) => urun.category.includes("Süt Ürünü"))
+        );
+        setBaharatlar(data.filter((urun) => urun.category.includes("Baharat")));
+        setTatlandiricilar(
+          data.filter((urun) => urun.category.includes("Tatlandırıcı"))
+        );
+        setDenizUrunleri(
+          data.filter((urun) => urun.category.includes("Deniz Ürünü"))
+        );
+        setTahillar(data.filter((urun) => urun.category.includes("Tahıl")));
+        setKuruyemisler(
+          data.filter((urun) => urun.category.includes("Kuruyemiş"))
+        );
+        setSekerler(data.filter((urun) => urun.category.includes("Şeker")));
       })
       .catch((error) => {
         console.error("Error:", error);
@@ -87,9 +99,8 @@ const MakeRecipe = () => {
   const getRecipe = () => {
     const combinedIngredients = Object.values(selectedItems).flat().join(", ");
 
-
     axios
-      .post("https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/chat?prompt="+combinedIngredients)
+      .post("http://localhost:8080/api/v1/chat?prompt=" + combinedIngredients)
       .then((response) => {
         const { data } = response;
         setRecipeText(data.choices[0].message.content); // Tarif metnini state'e kaydet

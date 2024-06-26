@@ -92,7 +92,7 @@ const RecipeApp = () => {
   //     const fetchFavorites = async () => {
   //       try {
   //         const response = await axios.get(
-  //           https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/users/${user.id}/favorites
+  //           http://localhost:8080/api/v1/users/${user.id}/favorites
   //         );
   //         const receivedFavorites = response.data || [];
   //         setFavorites(receivedFavorites);
@@ -109,7 +109,7 @@ const RecipeApp = () => {
   //   const removeFromFavorites = async (recipeId) => {
   //     try {
   //       await axios.delete(
-  //         https://bili-recipe-app-b029f5efbaee.herokuapp.com/api/v1/users/${user.id}/favorites/${recipeId}
+  //         http://localhost:8080/api/v1/users/${user.id}/favorites/${recipeId}
   //       );
   //       setFavorites(favorites.filter((recipe) => recipe.id !== recipeId));
   //     } catch (error) {
